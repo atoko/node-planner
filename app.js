@@ -5,9 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -22,8 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+var getRoutes = require('./routes/get');
+app.use('/get', getRoutes);
+
+var setRoutes = require('./routes/set');
+app.use('/set', setRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,5 +56,27 @@ app.use(function(err, req, res, next) {
   });
 });
 
+global.testData = {
+  planId: 1,
+  name: 'NYC bruh', 
+  categories:{
+    1: {
+      categoryId: 1,
+      name: 'gluttony', 
+      tasks: {
+        1: {taskId: 1, name:'ramen', image:"foo.jpg"},
+        4: {taskId: 4, name:'alice tea shop', coordinates:"86,44", visited:null}
+      }
+    },
+    2: {
+      categoryId: 2,      
+      name: 'wrath', 
+      tasks: {
+        3: {taskId: 3, name:'pool', visited:'6/14/2016'},
+        2: {taskId: 2, name:'3d printing', image:"bar.jpg", visited:null}
+      }
+    }
+  }
+};
 
 module.exports = app;

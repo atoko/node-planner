@@ -8,6 +8,12 @@ var app = require('../app');
 var debug = require('debug')('pathfinder:server');
 var http = require('http');
 
+//Initialize DB
+var massive = require("massive");
+var connectionString = "postgres://postgres:password@localhost/app_planner";
+var massiveInstance = massive.connectSync({connectionString : connectionString}) ;
+global.db = massiveInstance;
+
 /**
  * Get port from environment and store in Express.
  */
