@@ -19,11 +19,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var getRoutes = require('./routes/get');
-app.use('/get', getRoutes);
+var agenda = require('./routes/agenda');
+var category = require('./routes/category');
+var task = require('./routes/task');
+app.use('/agenda', agenda);
+app.use('/category', category);
+app.use('/task', task);
 
-var setRoutes = require('./routes/set');
-app.use('/set', setRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
