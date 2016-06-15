@@ -1,37 +1,39 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/category/new/:planId', function(req, res, next) {
-  var testData = global.testData;
-  var categoryName = req.body.name;
-  if (req.params.planId == 1 && categoryName != null)
-  {
-    var count = Object.keys(testData.categories).length;
-    testData.categories[count + 1] = {categoryId: count + 1, name: categoryName, tasks:{}};
-    res.json(true);
-  }
-  else
-  {
-    res.json(false);
-  }
-  res.end();
+router.post('/category/new/:agenda_id', function(req, res, next) {
+  global.db.api.category.AddToAgenda(req.params.agenda_id, 'meatgrinder',
+    function(err, category)
+    {
+      if (err == null && category[0] != null)
+      {
+        res.json(category[0]["category"]);
+      }
+      else
+      {
+        res.json({});      
+      }
+
+    res.end();
+    });
 });
 
 
-router.post('/task/new/:categoryId', function(req, res, next) {
-  var  testData = global.testData;
-  var categoryName = "category_name";
-  if (req.params.id == 1 && categoryName != null)
-  {
-    var count = Object.keys(testData.categories).length;
-    testData.categories[count + 1] = {categoryId: count + 1, name: categoryName, tasks:{}};
-    res.json(true);
-  }
-  else
-  {
-    res.json(false);
-  }
-  res.end();
+router.post('/task/new/:category_id', function(req, res, next) {
+  global.db.api.task.AddToCategory(req.params.category_id, 'meatgrinder',
+    function(err, task)
+    {
+      if (err == null && task[0] != null)
+      {
+        res.json(task[0]["category"]);
+      }
+      else
+      {
+        res.json({});      
+      }
+
+    res.end();
+    });
 });
 
 
