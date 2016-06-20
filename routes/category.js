@@ -22,22 +22,26 @@ router.get('/:id', function(req, res, next) {
     res.end();
   });
 });
-
 router.post('/new/:agenda_id', function(req, res, next) {
-  const name = req.body.name;
-
-  if (name == null)
+  const name = req.body.category;
+  
+  if (name == null || req.params.agenda_id == null)
   {
-    res.json({});
+    res.json({error: "Name or agenda id null"});
     return;
   }
+  const category = {
+      agenda_id: req.params.agenda_id,
+      category: name
+  };
 
-  global.db.api.category.AddToAgenda(req.params.agenda_id, name,
-    function(err, category)
-    {
-      if (err == null && category[0] != null)
+  global.db.core.AgendaCategories.save(category, function(err, category){
+      if (err == null && category != null)
       {
-        res.json(category[0]["category"]);
+        category.category_id = category.id;
+        category.tasks = [];
+        delete category.id;
+        res.json(category);
       }
       else
       {
@@ -45,8 +49,7 @@ router.post('/new/:agenda_id', function(req, res, next) {
       }
 
     res.end();
-    });
+  });
 });
-
 
 module.exports = router;

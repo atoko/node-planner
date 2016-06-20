@@ -18,21 +18,24 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/new/:category_id', function(req, res, next) {
-  const name = req.body.name;
-
+  const name = req.body.task;
+  
   if (name == null || req.params.category_id == null)
   {
     res.json({error: "Name or category id null"});
     return;
   }
-  
-  //replace with .save function
-  global.db.api.task.AddToCategory(req.params.category_id, name,
-    function(err, task)
-    {
-      if (err == null && task[0] != null)
+  const task = {
+      category_id: req.params.category_id,
+      task: name
+  };
+
+  global.db.core.AgendaCategoryTasks.save(task, function(err, task){
+      if (err == null && task != null)
       {
-        res.json(task[0]["category"]);
+        task.task_id = task.id;
+        delete task.id;
+        res.json(task);
       }
       else
       {
@@ -40,7 +43,7 @@ router.post('/new/:category_id', function(req, res, next) {
       }
 
     res.end();
-    });
+  });
 });
 
 router.post('/:id', function(req, res, next) {
