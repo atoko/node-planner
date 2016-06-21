@@ -17,6 +17,24 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+
+var HandleUpsert = function(res)
+{
+  return (err, row) => 
+  {
+    if (err == null && row != null)
+    {
+      row.task_id = row.id;
+      delete row.id;
+      res.json(row);
+    }
+    else
+    {
+      res.json({});      
+    }
+    res.end();      
+  }
+}
 router.post('/new/:category_id', function(req, res, next) {
   const name = req.body.task;
   
@@ -30,28 +48,15 @@ router.post('/new/:category_id', function(req, res, next) {
       task: name
   };
 
-  global.db.core.AgendaCategoryTasks.save(task, function(err, task){
-      if (err == null && task != null)
-      {
-        task.task_id = task.id;
-        delete task.id;
-        res.json(task);
-      }
-      else
-      {
-        res.json({});      
-      }
-
-    res.end();
-  });
+  global.db.core.AgendaCategoryTasks.save(task, HandleUpsert(res));
 });
 
 router.post('/:id', function(req, res, next) {
-  const name = req.body.name;
+  const task = req.body.task;
   const id = parseInt(req.params.id);
-  if (name == null || isNaN(id))
+  if (task == null || isNaN(id))
   {
-    res.json({error:"name is null or id is invalid"});
+    res.json({error:"task is null or id is invalid"});
     return;
   }
 
@@ -59,11 +64,9 @@ router.post('/:id', function(req, res, next) {
   global.db.core.AgendaCategoryTasks.findOne(id, function(error, response) {
 	  if (error == null && response != undefined)
 	  {
-		  //Update logic
-		  global.db.core.AgendaCategoryTasks.save({id: id, task: name}, function(err, task){
-			  if (error == null)
-			  res.json(task);
-		  });
+		  task.id = id;
+      delete task.task_id;
+		  global.db.core.AgendaCategoryTasks.save(task, HandleUpsert(res));
 	  }
 	  else
 	  {

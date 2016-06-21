@@ -30,3 +30,18 @@ FROM (
         ) c_row ON c_row.agenda_id = d.id
     GROUP BY d.id
     ) r(agenda_id, agenda, categories);
+
+
+
+--
+CREATE VIEW core.categories_json AS
+SELECT r.id as category_id, row_to_json(r, true) as category
+FROM (
+    SELECT
+        d.id as category_id,
+        d.category,
+        json_agg(m) AS categories
+    FROM core."AgendaCategories" d
+    LEFT JOIN core."AgendaCategoryTasks" m ON (d.id = m.category_id)
+    GROUP BY d.id
+) r(id, agenda, categories);

@@ -10,7 +10,8 @@ var http = require('http');
 
 //Initialize DB
 var massive = require("massive");
-var connectionString = "postgres://postgres:password@localhost/app_planner";//"postgres://postgres:password@192.168.0.5/postgres";
+//var connectionString = "postgres://postgres:password@localhost/app_planner";
+var connectionString = "postgres://postgres:password@192.168.0.5/postgres";
 var massiveInstance = massive.connectSync({connectionString : connectionString}) ;
 global.db = massiveInstance;
 
