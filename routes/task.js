@@ -30,7 +30,7 @@ var HandleUpsert = function(res)
     }
     else
     {
-      res.json({});      
+      res.json({error: err});      
     }
     res.end();      
   }
@@ -70,7 +70,7 @@ router.post('/:id', function(req, res, next) {
 	  }
 	  else
 	  {
-		  res.json({});
+		  res.json({error});
 	  }
   });
 });

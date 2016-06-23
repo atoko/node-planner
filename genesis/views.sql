@@ -21,7 +21,7 @@ FROM (
             SELECT "AgendaCategoryTasks".category_id,
                             "AgendaCategoryTasks".task,
                             "AgendaCategoryTasks".location,
-                            "AgendaCategoryTasks".file_id AS image,
+                            "AgendaCategoryTasks".file_id,
                             "AgendaCategoryTasks".visited,
                             "AgendaCategoryTasks".id AS task_id
             FROM core."AgendaCategoryTasks"
