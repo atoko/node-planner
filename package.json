@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "npm run build && npm run boot",
+    "build":"cd public/follow-me && git pull && npm install && webpack",
+    "boot":"node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
