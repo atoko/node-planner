@@ -23,7 +23,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public/follow-me/distribution')));
+app.use(express.static(path.join(__dirname, 'public/follow-me/')));
 
 var agenda = require('./routes/agenda');
 var category = require('./routes/category');
