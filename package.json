@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run build && npm run boot",
+    "start": "npm run boot",
     "build":"cd public/follow-me && git pull",
     "boot":"node ./bin/www"
   },
