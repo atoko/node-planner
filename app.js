@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var pgSession = require('connect-pg-simple')(session);
+var pg = require('pg');
 
 var app = express();
 
@@ -25,13 +28,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/root/')));
 
+var connectionString = "postgres://rxtsataaewzxoi:_kkuo2YFFJXYcxef0yz4EUeZfu@ec2-54-235-250-156.compute-1.amazonaws.com:5432/d21g3k5gclhnb6?ssl=true";
+app.use(session({
+  store: new pgSession({
+    pg : pg,
+    conString : connectionString,
+  }),
+  secret: 'lembas',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: null
+  }
+}));
+app.enable('trust proxy');
+
 var agenda = require('./routes/agenda');
 var category = require('./routes/category');
 var task = require('./routes/task');
+var portals = require('./routes/portals');
 app.use('/agenda', agenda);
 app.use('/category', category);
 app.use('/task', task);
-
+app.use('/portals', portals);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
