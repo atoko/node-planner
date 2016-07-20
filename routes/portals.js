@@ -16,7 +16,7 @@ const GetIp = function(req)
 }
 
 router.get('/:lat/:long', function(req, res, next) {
-  const radius = 7;
+  const radius = 5;
   const ip = GetIp(req);
 
   global.db.core.geolocate(req.params.lat / 100000, req.params.long / 100000, radius, ip,
@@ -24,7 +24,7 @@ router.get('/:lat/:long', function(req, res, next) {
   {
     if (err == null && rows[0] != null)
     {
-      res.json(rows);
+      res.json(rows.slice(0, 200));
     }
     else
     {
