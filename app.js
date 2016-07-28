@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/root/')));
 
-var connectionString = "postgres://rxtsataaewzxoi:_kkuo2YFFJXYcxef0yz4EUeZfu@ec2-54-235-250-156.compute-1.amazonaws.com:5432/d21g3k5gclhnb6?ssl=true";
+var connectionString = "postgres://ndnzpghayilcfa:-rzECnYjrDayZXkYZBRHE4uzb2@ec2-54-225-195-254.compute-1.amazonaws.com:5432/d5uh99p8v22iv?ssl=true";
 app.use(session({
   store: new pgSession({
     pg : pg,

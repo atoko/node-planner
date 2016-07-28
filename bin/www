@@ -12,7 +12,7 @@ var http = require('http');
 var massive = require("massive");
 //var connectionString = "postgres://postgres:password@localhost/app_planner";
 //var connectionString = "postgres://postgres:password@192.168.0.5/postgres";
-var connectionString = "postgres://rxtsataaewzxoi:_kkuo2YFFJXYcxef0yz4EUeZfu@ec2-54-235-250-156.compute-1.amazonaws.com:5432/d21g3k5gclhnb6?ssl=true";
+var connectionString = "postgres://ndnzpghayilcfa:-rzECnYjrDayZXkYZBRHE4uzb2@ec2-54-225-195-254.compute-1.amazonaws.com:5432/d5uh99p8v22iv?ssl=true";
 var massiveInstance = massive.connectSync({connectionString : connectionString}) ;
 
 global.db = massiveInstance;
