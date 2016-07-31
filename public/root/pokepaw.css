@@ -231,10 +231,15 @@
 		overflow-y: auto;		
 	}	
 	#mapDiv {
+		bottom: 2px;
 		height: 70vh;
 	}
 	/* Tablet view */
 	@media screen and (max-width:769px) {
+	#mapDiv {
+		bottom: 2px;
+		height: 70vh;
+	}		
 	.notOnDesktop {
 	   /* Search box shown only in mobile view and Tablet view */
 	   display: block;
@@ -298,13 +303,10 @@
 	   width: 100%;
 	}
 
-	#mapDiv {
-		height: 800px;
-	}
 	/* Mobile view */
 	@media screen and (max-width:480px) {
 	#mapDiv {
-		height: 400px;
+		height: 40vh;
 	}
 	#mainwrapper header #logo {
 	   /* Company Logo text in header */
@@ -359,6 +361,7 @@
 .HolyGrail-body {
   display: flex;
   flex-direction: column-reverse;
+	bottom: '50px';
 }
 
 .HolyGrail-nav {                
@@ -367,12 +370,12 @@
 
 @media (min-width: 768px) {                                    
   .HolyGrail-body {
-    flex-direction: row-reverse;
+    flex-direction: row;
     flex: 1;                    
   height: 95vh;                                     
   }
   .HolyGrail-content {
-    flex: 1;                                     
+    flex: 1;                                
   }
   .HolyGrail-nav, .HolyGrail-ads {
     /* 12em is the width of the columns */
@@ -412,4 +415,24 @@
 	background: -webkit-linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(25,10,10,1) 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(25,10,10,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#190a0a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.loading {
+	border: 5 solid black;
+border-color: -moz-linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+border-color: -webkit-linear-gradient(180deg, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+border-color: linear-gradient(180deg, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */}
+
+.loadingContent 
+{
+	left: 50%;
+	top: 50%;
+	display:block;
+	position:relative;
+}
+
+#app
+{
+	
 }
