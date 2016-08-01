@@ -364,8 +364,10 @@
 	bottom: '50px';
 }
 
-.HolyGrail-nav {                
+.HolyGrail-nav {     
+	marginTop: 20px;           
   order: -1;
+  height: 85vh;
 }                                                                                                                                                                                         
 
 @media (min-width: 768px) {                                    
